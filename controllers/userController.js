@@ -107,7 +107,7 @@ exports.register = function(req, res) {
         // Email sending
         sendgrid.send({
             to: 'ebenezernarh83@gmail.com',
-            from: 'Eben',
+            from: 'eben@eben.com',
             subject: 'Thank you for  Signing up',
             text: 'YOU DID WELL TO SIGN UP.',
             html: `Thank you <strong>${user.data.username}</strong> for signing up`
