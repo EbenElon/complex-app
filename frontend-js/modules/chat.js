@@ -51,6 +51,7 @@ export default class chat {
         this.openedYet = true
         this.chatWrapper.classList.add("chat--visible")
         this.chatField.focus()
+        alert('Sorry, Eben is now working on the Chat. Enjoy your day.')
     }
 
     openConnection() {
