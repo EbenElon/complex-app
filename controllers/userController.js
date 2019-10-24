@@ -2,6 +2,8 @@ const User = require('../models/User')
 const Post = require('../models/Post')
 const Follow = require('../models/Follow')
 const jwt = require('jsonwebtoken')
+const sendgrid = require('@sendgrid/mail')
+sendgrid.setApiKey(process.env.SENDGRIDAPIKEY)
 
 exports.apiGetPostsByUsername = async function(req, res) {
     try {
@@ -101,6 +103,16 @@ exports.logout = function(req, res) {
 exports.register = function(req, res) {
     let user = new User(req.body)
     user.register().then(() => {
+
+        // Email sending
+        sendgrid.send({
+            to: 'ebenezernarh83@gmail.com',
+            from: 'Eben',
+            subject: 'Thank you for  Signing up',
+            text: 'YOU DID WELL TO SIGN UP.',
+            html: `Thank you <strong>${user.data.username}</strong> for signing up`
+        })
+
         req.session.user = { username: user.data.username, avatar: user.avatar, _id: user.data._id }
         req.session.save(function() {
             res.redirect('/')
